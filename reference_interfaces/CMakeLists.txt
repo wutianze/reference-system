@@ -11,18 +11,20 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake_auto REQUIRED)
+find_package(interneuron_msgs REQUIRED)
 ament_auto_find_build_dependencies()
 
 # add additional messages here
 set(msg_files
   "msg/TransmissionStats.idl"
   "msg/Message4kb.idl"
+  "msg/MessageInterneuron.idl"
 )
 
 # add additional message dependencies here
-#set(msg_dependencies
-#  "std_msgs"
-#)
+set(msg_dependencies
+  "interneuron_msgs"
+)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${msg_files}

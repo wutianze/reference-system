@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: Sauron
+ * @Date: 2023-04-06 14:23:58
+ * @LastEditTime: 2023-05-12 11:21:53
+ * @LastEditors: Sauron
+ */
 // Copyright 2021 Apex.AI, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +23,15 @@
 #include <chrono>
 #include <string>
 #include <utility>
+#include <vector>
 
 #include "rclcpp/rclcpp.hpp"
 #include "reference_system/msg_types.hpp"
 #include "reference_system/nodes/settings.hpp"
 #include "reference_system/sample_management.hpp"
+#ifdef INTERNEURON
+#include "interneuron_lib/interneuron_monitor.hpp"
+#endif
 
 namespace nodes
 {
@@ -37,6 +48,11 @@ public:
     timer_ = this->create_wall_timer(
       settings.cycle_time,
       [this] {timer_callback();});
+      #ifdef INTERNEURON
+      std::vector<std::string> sensor_names;
+      sensor_names.push_back(settings.topic_name);
+      //interneuron::init_timepoint(this,settings.topic_name,)
+      #endif
   }
 
 private:
@@ -44,6 +60,10 @@ private:
   {
     uint64_t timestamp = now_as_int();
     auto message = publisher_->borrow_loaned_message();
+    #ifdef INTERNEURON
+    message.get().header.time_pieces[0].start_time = timestamp;
+    message.get().header.time_pieces[0].sensor_name = "sensor1";
+    #endif
     message.get().size = 0;
 
     set_sample(

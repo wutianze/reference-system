@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
+
+cmake_policy(SET CMP0121 NEW)
+
 project(autoware_reference_system)
 
 option(RUN_BENCHMARK "Run the full benchmark tests" OFF)  # default to off for CI purposes
@@ -115,10 +118,10 @@ if(${BUILD_TESTING})
     if(${ALL_RMWS} MATCHES OFF)
       list(REVERSE rmws_available)
       foreach(rmw ${rmws_available})
-        list(LENGTH rmws_available COUNT)
-        if(NOT COUNT MATCHES 1)
+        list(LENGTH rmws_available count)
+        if(NOT ${count} MATCHES 1)
           # message("Removing ${rmw} from tests")
-          list(REMOVE_AT rmws_available COUNT)
+          list(REMOVE_AT rmws_available 0)
         endif()
       endforeach()
     endif()

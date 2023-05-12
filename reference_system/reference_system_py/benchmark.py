@@ -151,7 +151,7 @@ def generate_callback_trace(executable, pkg, directory, runtime_sec, rmw):
 
     The 'callback' method measures the executable using 'ros2 trace'
     """
-    raise NotImplementedError('lttng currently does not work within ADE')
+    #raise NotImplementedError('lttng currently does not work within ADE')
 
     if not tracetools_available:
         raise RuntimeError('Unable to import tracetools_trace. Are the tracetools installed?')

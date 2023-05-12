@@ -325,7 +325,7 @@ void print_sample_path(
 
   (void)lost_samples;  // to avoid unused param warning in Clang
 
-#if 0
+#if 1
   for (uint64_t i = 0; i < sample->size; ++i) {
     std::string name((const char *)sample->stats[i].node_name.data());
     std::cout << "  [";

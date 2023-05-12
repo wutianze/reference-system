@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: Sauron
+ * @Date: 2023-04-06 14:23:58
+ * @LastEditTime: 2023-04-18 13:41:33
+ * @LastEditors: Sauron
+ */
 // Copyright 2021 Apex.AI, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,27 +46,28 @@ struct Default
   // to figure out what values to place here corresponding to the run_time
   // you would like to run each node for
   // processing
-  static constexpr uint64_t POINTS_TRANSFORMER_FRONT = 4096;
-  static constexpr uint64_t POINTS_TRANSFORMER_REAR = 4096;
-  static constexpr uint64_t VOXEL_GRID_DOWNSAMPLER = 4096;
-  static constexpr uint64_t POINT_CLOUD_MAP_LOADER = 4096;
-  static constexpr uint64_t RAY_GROUND_FILTER = 4096;
-  static constexpr uint64_t EUCLIDEAN_CLUSTER_DETECTOR = 4096;
-  static constexpr uint64_t EUCLIDEAN_INTERSECTION = 4096;
-  static constexpr uint64_t OBJECT_COLLISION_ESTIMATOR = 4096;
-  static constexpr uint64_t MPC_CONTROLLER = 4096;
-  static constexpr uint64_t PARKING_PLANNER = 4096;
-  static constexpr uint64_t LANE_PLANNER = 4096;
+  // benchmark result in PC: 8192=8.35ms; 16384=30.47ms; 32768=111.83ms
+  static constexpr uint64_t POINTS_TRANSFORMER_FRONT = 20000;
+  static constexpr uint64_t POINTS_TRANSFORMER_REAR = 20000;
+  static constexpr uint64_t VOXEL_GRID_DOWNSAMPLER = 20000;
+  static constexpr uint64_t POINT_CLOUD_MAP_LOADER = 20000;
+  static constexpr uint64_t RAY_GROUND_FILTER = 20000;
+  static constexpr uint64_t EUCLIDEAN_CLUSTER_DETECTOR = 20000;
+  static constexpr uint64_t EUCLIDEAN_INTERSECTION = 20000;
+  static constexpr uint64_t OBJECT_COLLISION_ESTIMATOR = 20000;
+  static constexpr uint64_t MPC_CONTROLLER = 20000;
+  static constexpr uint64_t PARKING_PLANNER = 20000;
+  static constexpr uint64_t LANE_PLANNER = 20000;
 
   // fusion
-  static constexpr uint64_t POINT_CLOUD_FUSION = 4096;
-  static constexpr uint64_t NDT_LOCALIZER = 4096;
-  static constexpr uint64_t VEHICLE_INTERFACE = 4096;
-  static constexpr uint64_t LANELET_2_GLOBAL_PLANNER = 4096;
-  static constexpr uint64_t LANELET_2_MAP_LOADER = 4096;
+  static constexpr uint64_t POINT_CLOUD_FUSION = 20000;
+  static constexpr uint64_t NDT_LOCALIZER = 20000;
+  static constexpr uint64_t VEHICLE_INTERFACE = 20000;
+  static constexpr uint64_t LANELET_2_GLOBAL_PLANNER = 20000;
+  static constexpr uint64_t LANELET_2_MAP_LOADER = 20000;
 
   // cyclic
-  static constexpr uint64_t BEHAVIOR_PLANNER = 4096;
+  static constexpr uint64_t BEHAVIOR_PLANNER = 20000;
   static constexpr time_t BEHAVIOR_PLANNER_CYCLE = milliseconds(100);
 };
 

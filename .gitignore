@@ -8,3 +8,9 @@ doxybook2**
 bin
 include
 lib
+
+install
+build
+log
+.history
+.vscode

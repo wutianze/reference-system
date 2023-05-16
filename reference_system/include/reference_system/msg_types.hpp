@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Sauron
  * @Date: 2023-04-06 14:23:58
- * @LastEditTime: 2023-05-11 16:38:42
+ * @LastEditTime: 2023-05-12 14:37:44
  * @LastEditors: Sauron
  */
 // Copyright 2021 Apex.AI, Inc.
@@ -25,7 +25,6 @@
 using message_t = reference_interfaces::msg::MessageInterneuron;
 #else
 #include "reference_interfaces/msg/message4kb.hpp"
-
 using message_t = reference_interfaces::msg::Message4kb;
 #endif
 #endif  // REFERENCE_SYSTEM__MSG_TYPES_HPP_

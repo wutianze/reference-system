@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: Sauron
+ * @Date: 2023-04-06 14:23:58
+ * @LastEditTime: 2023-05-12 15:15:53
+ * @LastEditors: Sauron
+ */
 // Copyright 2021 Apex.AI, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +32,10 @@ struct CommandSettings
 {
   std::string node_name;
   std::string input_topic;
+  
+  #ifdef INTERNEURON
+  std::vector<std::string> sensor_names;
+  #endif
 };
 
 struct FusionSettings
@@ -34,6 +45,12 @@ struct FusionSettings
   std::string input_1;
   std::string output_topic;
   uint64_t number_crunch_limit;
+
+  #ifdef INTERNEURON
+  std::vector<std::string> input_0_sensor_names;
+  std::vector<std::string> input_1_sensor_names;
+  std::vector<std::string> output_sensor_names;
+  #endif
 };
 
 struct TransformSettings
@@ -42,6 +59,11 @@ struct TransformSettings
   std::string input_topic;
   std::string output_topic;
   uint64_t number_crunch_limit;
+
+  #ifdef INTERNEURON
+  std::vector<std::string> input_sensor_names;
+  std::vector<std::string> output_sensor_names;
+  #endif
 };
 
 struct IntersectionSettings
@@ -51,6 +73,11 @@ struct IntersectionSettings
     std::string input_topic;
     std::string output_topic;
     uint64_t number_crunch_limit;
+  
+    #ifdef INTERNEURON
+    std::vector<std::string> input_sensor_names;
+    std::vector<std::string> output_sensor_names;
+    #endif
   };
 
   std::string node_name;
@@ -64,6 +91,10 @@ struct CyclicSettings
   std::string output_topic;
   uint64_t number_crunch_limit;
   std::chrono::nanoseconds cycle_time;
+  #ifdef INTERNEURON
+  std::vector<std::vector<std::string>> input_sensor_names;
+  std::vector<std::string> output_sensor_names;
+  #endif
 };
 
 struct SensorSettings
@@ -71,6 +102,10 @@ struct SensorSettings
   std::string node_name;
   std::string topic_name;
   std::chrono::nanoseconds cycle_time;
+
+  #ifdef INTERNEURON
+  std::string sensor_name;
+  #endif
 };
 }  // namespace nodes
 #endif  // REFERENCE_SYSTEM__NODES__SETTINGS_HPP_

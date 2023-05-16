@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Sauron
  * @Date: 2023-04-06 14:23:58
- * @LastEditTime: 2023-05-12 11:21:53
+ * @LastEditTime: 2023-05-13 21:38:26
  * @LastEditors: Sauron
  */
 // Copyright 2021 Apex.AI, Inc.
@@ -42,7 +42,8 @@ class Sensor : public rclcpp::Node
 {
 public:
   explicit Sensor(const SensorSettings & settings)
-  : Node(settings.node_name)
+  : Node(settings.node_name),
+    settings_(settings) 
   {
     publisher_ = this->create_publisher<message_t>(settings.topic_name, 1);
     timer_ = this->create_wall_timer(
@@ -50,8 +51,8 @@ public:
       [this] {timer_callback();});
       #ifdef INTERNEURON
       std::vector<std::string> sensor_names;
-      sensor_names.push_back(settings.topic_name);
-      //interneuron::init_timepoint(this,settings.topic_name,)
+      sensor_names.push_back(settings.sensor_name);
+      interneuron::init_timepoint(this,settings.topic_name,sensor_names);
       #endif
   }
 
@@ -77,6 +78,7 @@ private:
   rclcpp::Publisher<message_t>::SharedPtr publisher_;
   rclcpp::TimerBase::SharedPtr timer_;
   uint32_t sequence_number_ = 0;
+  SensorSettings settings_;
 };
 }  // namespace rclcpp_system
 }  // namespace nodes

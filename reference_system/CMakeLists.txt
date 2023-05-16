@@ -18,17 +18,19 @@ endif()
 
 if(${INTERNEURON})
   add_compile_options(-DINTERNEURON)
+  find_package(interneuron_lib REQUIRED)
+  find_package(interneuron_msgs REQUIRED)
 endif()
 
 find_package(ament_cmake_auto REQUIRED)
-find_package(interneuron_lib REQUIRED)
-find_package(interneuron_msgs REQUIRED)
 ament_auto_find_build_dependencies()
 
 # Add header-only library
 add_library(${PROJECT_NAME} INTERFACE)
 #ament_target_dependencies(${PROJECT_NAME} "interneuron_lib")
+if(${INTERNEURON})
 target_link_libraries(${PROJECT_NAME} INTERFACE "interneuron_lib")
+endif()
 
 target_include_directories(${PROJECT_NAME} INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -45,7 +47,10 @@ if(${BUILD_TESTING})
   ament_add_gtest(test_sample_management
       test/test_sample_management.cpp)
   target_link_libraries(test_sample_management ${PROJECT_NAME})
-  ament_target_dependencies(test_sample_management reference_interfaces interneuron_msgs)
+  ament_target_dependencies(test_sample_management reference_interfaces)
+if(${INTERNEURON})
+  ament_target_dependencies(test_sample_management interneuron_msgs)
+endif()
 
   ament_add_gtest(test_number_cruncher
       test/test_number_cruncher.cpp)
@@ -57,7 +62,10 @@ if(${BUILD_TESTING})
         test/test_fixtures.hpp
         test/test_reference_system_rclcpp.cpp)
     target_link_libraries(test_reference_system_rclcpp ${PROJECT_NAME})
-    ament_target_dependencies(test_reference_system_rclcpp reference_interfaces rclcpp interneuron_lib)
+    ament_target_dependencies(test_reference_system_rclcpp reference_interfaces rclcpp)
+  if(${INTERNEURON})
+  ament_target_dependencies(test_sample_management interneuron_lib)
+  endif()
   endif()
 endif()
 
